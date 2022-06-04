@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <style>
+        body{
+            padding:15px;
+        }
+        
+        #form{
+            width: 700px;
+            position: relative;
+            margin:auto;
+            border:1px solid lightslategray;
+            padding:15px;
+            border-radius: 15px;
+            margin-top: 150px;
+        }
+        #btn_signup{
+            margin-left:auto;
+        }
+        #error{
+            color:red;
+        }
+    </style>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'bootstrap.css' %}"></link>
+
+    <title>Register</title>
+</head>
+<body>
+    <div id="form">
+        <form method="post">
+
+        {% csrf_token %}
+
+        <small id = "error">{{ error }}</small>
+        
+
+        {{ form.email }}
+        <br>
+        {{ form.username }}
+        <br>
+        {{ form.password }}
+        <br>
+        <button type="submit" id="btn_signup" type="submit" class="btn btn-primary">Sign up</button>
+
+    </form>
+    </div>
+    
+</body>
+</html>

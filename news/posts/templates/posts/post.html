@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'bootstrap.css' %}"></link>
+    <style>
+        body{
+            padding:15px;
+            position:relative;
+            background-color: #F5F5F5;
+        }
+        #post{
+            margin:auto;
+            width: 750px;
+            padding: 15px;
+            height:max-content;
+            background-color: #FFFFFF;
+            border-radius: 15px;
+        }
+        
+        h3{
+            text-align: center;
+        }
+    </style>
+    <title>{{ title }}</title>
+</head>
+<body>
+    <a href="http://0.0.0.0:8000/"><button type="button" style="float:right;margin-top:-5px;"class="btn btn-success">Home</button></a>
+    <div id="post">
+        <h4>Author: <strong>{{author}} </strong> <small style="color:#7F7F7F;">({{date_created}})</small></h4>
+        <br>
+        <h3>{{title}}</h3>
+        <p>{{content}}</p>
+        <br>
+        <small style="color:#7f7f7f">views:{{views}}</small>
+        <br>
+        <br>
+        
+        <button type="button" id="12345" href="http://0.0.0.0:8000/post/api/{{title_url}}/favorite/" style="float:right;margin-top:-5px;" onclick="favorite()" class="btn btn-dark">Add to favorites</button>
+        
+        <form method="post">
+            {% csrf_token %}
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="submit" name="action_rate" value="-1" class="btn btn-danger">-</button>
+                <button type="submit" name="action_rate" value="0" class="btn btn-light">{{rate}}</button>
+                <button type="submit" name="action_rate" value="1" class="btn btn-success">+</button>
+            </div>
+        </form>
+
+    </div>
+
+    <script>
+        function favorite(){
+            var req = new XMLHttpRequest()
+            req.open('POST',document.getElementById("12345").getAttribute('href'),true)
+            req.setRequestHeader('Authorization','Bearer '+ '{{token}}')
+            req.send()
+            
+        }
+    </script>
+    
+</body>
+</html>

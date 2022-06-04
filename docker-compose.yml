@@ -1,0 +1,29 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres
+    container_name: news_db
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 2201
+      POSTGRES_USER: satanisticmicrowave
+      POSTGRES_DB: news_db
+      POSTGRES_HOST: localhost
+      POSTGRES_PORT : 54321
+      PGDATA: db/data
+      POSTGRES_INITDB_ARGS: "-A md5"
+    ports:
+      - 5432:5432
+  news_server:
+    container_name: news_server
+    depends_on:
+      - db
+    build: .
+    command:  news/init.sh
+    ports:
+      - 8000:8000
+
+
+
+  

@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'bootstrap.css' %}"></link>
+
+    <title>Posts</title>
+</head>
+<body>
+
+    <style>
+        body{
+            padding: 15px;
+        }
+        .post{
+            border-radius: 10px;
+            border: 1px solid lightslategray;
+            width:650px;
+            height:fit-content;
+            padding: 15px;
+            position:flex;
+        }
+        #post_create{
+            border-radius: 10px;
+            width:650px;
+            height:fit-content;
+            padding: 1px;
+            position:flex;
+        }
+        #wrapper{
+            position:relative;
+            width:700px;
+            padding:5px;
+            margin:auto;
+        }
+        .post_create_elems{
+            width: 100%;
+            background-color: #AFAFAF;
+            color:lightgray;
+        }
+        #sort_params{
+            width: 300px;
+            height: fit-content;
+            border-radius: 10px;
+            padding: 15px;
+            margin: auto;
+            position: flex;
+            border: 1px solid lightslategray;
+        }
+    </style>
+
+    <a href="http://0.0.0.0:8000/profile"><button type="button" style="float:right;margin-top:-5px;"class="btn btn-success">Profile</button></a>
+
+    <div id="wrapper">
+        <div id="sort_params">
+            <form method="POST">
+                {% csrf_token %}
+                <p>
+                    <input type="number" style="width: 200px;" value="5" name="count" class="form-control" id="exampleInputNumber1" placeholder="Number of posts">
+                    
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        Sort 
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><button class="dropdown-item" type="submit" name="sort" value="date">by date</button></li>
+                            <li><button class="dropdown-item" type="submit" name="sort" value="rate">by rate</button></li>
+                            <li><button class="dropdown-item" type="submit" name="sort" value="views">by views</button></li>
+                        </ul>
+                    </div>
+                </p>
+            </form>
+        </div>
+        <br>
+        <div id="post_create">
+            <a href = "http://0.0.0.0:8000/post/create/" class="post_create_elems"><button type="button" class="btn post_create_elems btn-light"><strong>Create new post</strong></button></a>
+        </div> 
+        <br> 
+
+        {% for data in page_obj %}
+            <div class="post">
+                <p><strong>{{data.author}} </strong><small style="color:#7F7F7F;">{{data.date_created}}</small></p>
+                <p><strong>{{data.title}}</strong></p>
+                <p>{{data.summary}}</p>
+                <small style="color:#7F7F7F;">views:{{data.views}} </small>
+                <a href = "http://0.0.0.0:8000/post/{{data.title_url}}"><button type="button"  style="float:right;margin-top:-5px;"class="btn btn-light">Read more</button></a>
+            </div> 
+            <br> 
+        {% endfor %}
+
+        <nav aria-label="...">
+            <ul class="pagination">
+              <li class="page-item ">
+                <a class="page-link" href="?page={{previous}}" >Previous</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="?page={{next}}">Next</a>
+              </li>
+            </ul>
+          </nav>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+</body>
+</html>

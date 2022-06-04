@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <!-- CSS only -->
+<link rel="stylesheet" href="{% static 'bootstrap.css' %}"></link>
+    <title>Welcome!</title>
+
+    <style>
+        body{
+            padding: 5px;
+        }
+        #auth{
+            position:relative;
+            float:right;
+            text-align: right;
+            margin-top: -500px;
+        }
+        #btn_signin{
+            width: 200px;
+        }
+        #btn_signup{
+            width: 200px;
+        }
+        .post{
+            border-radius: 10px;
+            border: 1px solid lightslategray;
+            width:500px;
+            height:fit-content;
+            padding: 15px;
+            position:flex;
+        }
+        #posts_preview{
+            position:flex;
+            
+        }
+        #or{
+            position: relative;
+            width: 200px;
+            text-align: center;
+        }
+        #wrapper{
+            width: 70%;
+            margin: auto;
+            margin-top: 30px;
+        }
+        
+    </style>
+
+</head>
+<body>
+    <div id="wrapper">
+
+        <div id="posts_preview">
+
+            <div class="post">
+                <p><strong>johndoe </strong><small style="color:#7F7F7F;">May, 31</small></p>
+                <p><strong>Hi!</strong></p>
+                <p>News is a free platform for your creative posts!</p>
+                <small style="color:#7F7F7F;">views:67 </small>
+                <button type="button" style="float:right;margin-top:-5px;"class="btn btn-light">Read more</button>
+            </div>
+            <br>
+            <div class="post">
+                <p><strong>user_assistent </strong><small style="color:#7F7F7F;">May, 31</small></p>
+                <p><strong>Join us!</strong></p>
+                <p>It's easy and free, just enter your email, username and password!</p>
+                <small style="color:#7F7F7F;">views:23 </small>
+                <button type="button" style="float:right;margin-top:-5px;"class="btn btn-light">Read more</button>
+            </div>
+            <br>
+            <div class="post">
+                <p><strong>unexpectedpersonalcomputer </strong><small style="color:#7F7F7F;">May, 31</small></p>
+                <p><strong>Create, edit, read and delete your posts!</strong></p>
+                <p>It's simple!</p>
+                <small style="color:#7F7F7F;">views:84 </small>
+                <button type="button" style="float:right;margin-top:-5px;"class="btn btn-light">Read more</button>
+            </div> 
+            <br>
+            <div class="post">
+                <p><strong>the_eye </strong><small style="color:#7F7F7F;">May, 31</small></p>
+                <p><strong>Enjoy!</strong></p>
+                <p>We're glad to see you!</p>
+                <small style="color:#7F7F7F;">views:84 </small>
+                <button type="button" style="float:right;margin-top:-5px;"class="btn btn-light">Read more</button>
+            </div>        
+    
+        </div>
+        
+        <div id="auth">
+            <button type="button" id="btn_signin" class="btn btn-primary" onclick="signin()">Sign in</button>
+            <br>
+            <br>
+            <br>
+            <button type="button" id="btn_signup" class="btn btn-secondary" onclick="signup()">Sign up</button>
+        </div>
+
+    </div>
+    
+
+    <script>
+        function signin(){
+            window.location.replace("http://0.0.0.0:8000/auth/signin");
+        }
+        function signup(){
+            window.location.replace("http://0.0.0.0:8000/auth/register");
+        }
+    </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</body>
+</html>

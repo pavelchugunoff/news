@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <style>
+        body{
+            padding:15px;
+        }
+        
+        #form{
+            width: 700px;
+            position: relative;
+            margin:auto;
+            border:1px solid lightslategray;
+            padding:15px;
+            border-radius: 15px;
+            margin-top: 150px;
+        }
+        #btn_create{
+            margin-left:auto;
+        }
+        #error{
+            color:red;
+        }
+    </style>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'bootstrap.css' %}"></link>
+
+    <title>Create post</title>
+</head>
+<body>
+    <a href="http://0.0.0.0:8000/profile"><button type="button" style="float:right;margin-top:-5px;"class="btn btn-success">Profile</button></a>
+
+    <div id="form">
+        <form method="post">
+
+        {% csrf_token %}
+
+
+        <strong style="margin:auto">Create post</strong>
+        <br>
+        <br>
+        <small id = "error">{{ error }}</small>
+
+        {{ form.title }}
+        <br>
+        {{ form.summary }}
+        <br>
+        {{ form.content }}
+        <br>
+        <button type="submit" id="btn_create" type="submit" class="btn btn-primary">Create</button>
+
+    </form>
+    </div>
+    
+</body>
+</html>

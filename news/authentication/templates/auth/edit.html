@@ -1,0 +1,66 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <style>
+        body{
+            padding:15px;
+        }
+        
+        #form{
+            width: 700px;
+            position: relative;
+            margin:auto;
+            border:1px solid lightslategray;
+            padding:15px;
+            border-radius: 15px;
+            margin-top: 150px;
+        }
+        #error{
+            color:red;
+        }
+    </style>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'bootstrap.css' %}"></link>
+
+    <title>Edit user</title>
+</head>
+<body>
+    <a href="http://0.0.0.0:8000/profile"><button type="button" style="float:right;margin-top:-5px;"class="btn btn-success">Profile</button></a>
+
+    <div id="form">
+        <form method="post">
+
+        {% csrf_token %}
+
+        <small id = "error">{{ error }}</small>
+        
+
+        {{ form.email }}
+        <br>
+        {{ form.username }}
+        <br>
+        {{ form.password }}
+        <br>
+        <button type="submit"  type="submit" class="btn btn-primary">Edit</button>
+        <button type="submit"  type="button" style="float:right"class="btn btn-danger"onclick="delete_user()">Delete user</button>
+    </form>
+    </div>
+
+    <script>
+        function delete_user(){
+            var req = new XMLHttpRequest()
+            req.open('POST','http://0.0.0.0:8000/auth/api/delete/',true)
+            req.setRequestHeader('Authorization','Bearer '+ '{{token}}')
+            req.send()
+            window.location.replace('http://0.0.0.0:8000/')
+        }
+    </script>
+
+</body>
+</html>
